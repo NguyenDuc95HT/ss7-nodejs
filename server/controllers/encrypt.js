@@ -1,8 +1,6 @@
 'use strict';
 import {encryptHelper} from '../helpers/index'
-
 let encryptArr = [];
-
 export default class encryptController {
     createHash = async (req, res) => {
         try {
@@ -38,9 +36,7 @@ export default class encryptController {
             res.status(400).json(e);
         }
     };
-
     load = (req, res) => {
         console.log('on get');
-
     };
 }

@@ -1,11 +1,8 @@
 'use strict';
 import {encryptController} from '../controllers/index';
-
-
 let bcrypt = require('bcrypt');
 const saltRounds = 5;
 let salt = bcrypt.genSaltSync(saltRounds);
-
 export default class EncryptHelper {
     executeEncrypt = (text) => {
         return new Promise((resolve, reject) => {
@@ -22,7 +19,6 @@ export default class EncryptHelper {
             });
         })
     };
-
     isExistText = (text, hash) => {
         return new Promise((resolve, reject) => {
             bcrypt.compare(text, hash, function (err, res) {

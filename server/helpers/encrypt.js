@@ -1,8 +1,6 @@
 'use strict';
 import {encryptController} from '../controllers/index';
-let encryptArr = [
 
-];
 
 let bcrypt = require('bcrypt');
 const saltRounds = 5;
@@ -16,10 +14,8 @@ export default class EncryptHelper {
                     if (err) {
                         reject(err);
                     } else {
-                        encryptArr.push(hash);
-                        console.log(encryptArr);
                         resolve({
-                            data: hash
+                            hash: hash
                         });
                     }
                 });
@@ -27,39 +23,13 @@ export default class EncryptHelper {
         })
     };
 
-    checkEncrypt = (text) => {
-        return new Promise((resolve, reject) => {
-            try {
-                for (let i = 0; i < encryptArr.length; i++) {
-                    if (encryptController.isExistText(text, encryptArr[i]) === true) {
-                        resolve({
-                            data: 'OK'
-                        });
-                        break;
-                    } else {
-                    }
-                }
-                reject({
-                    error: 'not OK'
-                });
-
-            }  catch (e) {
-            reject(e);
-        }
-        });
-    };
-
-    isExistText = async (text, hash) => {
+    isExistText = (text, hash) => {
         return new Promise((resolve, reject) => {
             bcrypt.compare(text, hash, function (err, res) {
                 if (res === true) {
-                    resolve({
-                        hasHash: true
-                    });
+                    resolve(true);
                 } else {
-                    reject({
-                        hasHash: false
-                    });
+                    reject(false);
                 }
             });
         });
